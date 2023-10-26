@@ -19,7 +19,7 @@ class DogDetailSerializer(serializers.ModelSerializer):
     same_breed_dogs = serializers.SerializerMethodField()
 
     def get_same_breed_dogs(self, instance):
-        qty = Dog.objects.filter(breed=instance.breed).count()
+        qty = Dog.objects.filter(breed=instance).count()
         return qty
 
     class Meta:
