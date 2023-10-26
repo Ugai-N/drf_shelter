@@ -1,7 +1,9 @@
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 from shelter.models import Dog
-from shelter.serializers.dog import DogSerializer
+from shelter.serializers.breed import DogListSerializer
+
+from shelter.serializers.dog import DogDetailSerializer, DogSerializer
 
 
 class DogCreateAPIView(CreateAPIView):
@@ -9,12 +11,12 @@ class DogCreateAPIView(CreateAPIView):
 
 
 class DogListAPIView(ListAPIView):
-    serializer_class = DogSerializer
+    serializer_class = DogListSerializer
     queryset = Dog.objects.all()
 
 
 class DogRetrieveAPIView(RetrieveAPIView):
-    serializer_class = DogSerializer
+    serializer_class = DogDetailSerializer
     queryset = Dog.objects.all()
 
 
