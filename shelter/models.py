@@ -10,6 +10,7 @@ class Dog(models.Model):
     birth = models.DateField(verbose_name='ДР', **NULLABLE)
     breed = models.ForeignKey('Breed', on_delete=models.CASCADE, verbose_name="порода", related_name='dog', **NULLABLE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="автор", **NULLABLE)
+    is_public = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name}'
