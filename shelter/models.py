@@ -1,10 +1,13 @@
 from django.conf import settings
+from django.core.validators import RegexValidator
 from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
 
 
 class Dog(models.Model):
+    # name = models.CharField(max_length=250, verbose_name='кличка', validators=[RegexValidator()]) -
+    # один из способов валидации - на уровне модели, НО тогда эта валидации будет работать для всех, в т.ч.для модераторов
     name = models.CharField(max_length=250, verbose_name='кличка')
     photo = models.ImageField(upload_to='photo/', verbose_name='фото', **NULLABLE)
     birth = models.DateField(verbose_name='ДР', **NULLABLE)

@@ -3,9 +3,11 @@ from rest_framework import serializers
 
 from shelter.models import Dog, Breed
 from shelter.serializers.breed import BreedDetailSerializer
+from shelter.validators import validator_scam_words
 
 
 class DogSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(validators=[validator_scam_words])
 
     class Meta:
         model = Dog

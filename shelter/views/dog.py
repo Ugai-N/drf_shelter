@@ -2,6 +2,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 from rest_framework.permissions import IsAuthenticated
 
 from shelter.models import Dog
+from shelter.paginators import DogPaginator
 from shelter.serializers.breed import DogListSerializer
 
 from shelter.serializers.dog import DogDetailSerializer, DogSerializer
@@ -17,6 +18,7 @@ class DogListAPIView(ListAPIView):
     serializer_class = DogListSerializer
     queryset = Dog.objects.all()
     permission_classes = [IsAuthenticated]
+    pagination_class = DogPaginator
 
 
 class DogRetrieveAPIView(RetrieveAPIView):
