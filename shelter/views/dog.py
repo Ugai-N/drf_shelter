@@ -22,8 +22,8 @@ class DogListAPIView(ListAPIView):
 
 
 class DogRetrieveAPIView(RetrieveAPIView):
-    # serializer_class = DogDetailSerializer
-    serializer_class = DogSerializer
+    serializer_class = DogDetailSerializer
+    # serializer_class = DogSerializer
     queryset = Dog.objects.all()
     permission_classes = [IsAuthenticated, IsDogOwner | IsModerator | IsPublicDog]
 
