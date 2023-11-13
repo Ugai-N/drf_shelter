@@ -42,3 +42,4 @@ class BreedDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Breed
         fields = '__all__'
+
