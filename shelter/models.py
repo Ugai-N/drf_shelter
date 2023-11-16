@@ -15,6 +15,7 @@ class Dog(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="автор", **NULLABLE)
     is_public = models.BooleanField(default=False)
     price = models.PositiveIntegerField(verbose_name='цена', null=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="автор лайка", related_name='likes_dogs')
 
     def __str__(self):
         return f'{self.name}'

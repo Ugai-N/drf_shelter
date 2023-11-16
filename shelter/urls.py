@@ -3,7 +3,8 @@ from rest_framework.routers import DefaultRouter
 
 from shelter.apps import ShelterConfig
 from shelter.views.breed import BreedViewSet
-from shelter.views.dog import DogCreateAPIView, DogListAPIView, DogRetrieveAPIView, DogUpdateAPIView, DogDeleteAPIView
+from shelter.views.dog import DogCreateAPIView, DogListAPIView, DogRetrieveAPIView, DogUpdateAPIView, DogDeleteAPIView, \
+    SetDogLike
 
 app_name = ShelterConfig.name
 
@@ -16,4 +17,5 @@ urlpatterns = [
                   path('<int:pk>/', DogRetrieveAPIView.as_view(), name='view_dog'),
                   path('<int:pk>/edit/', DogUpdateAPIView.as_view(), name='edit_dog'),
                   path('<int:pk>/delete/', DogDeleteAPIView.as_view(), name='delete_dog'),
+                  path('set_like/', SetDogLike.as_view(), name='delete_dog'),
               ] + router.urls
