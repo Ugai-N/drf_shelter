@@ -16,3 +16,17 @@ def exchange_currency(amount, to_):
         # data = json.loads(response.text) - поскольку текст, то выдаст без дробных
         # return int(data['result'])
         return response.json().get('result')
+
+
+class MyBot:
+    URL = 'https://api.telegram.org/bot'
+    TOKEN = settings.TELEGRAM_TOKEN
+
+    def send_tg_message(self, text):
+        requests.post(
+            url=f'{self.URL}{self.TOKEN}/sendMessage',
+            data={
+                'chat_id': '459156742',
+                'text': text
+            }
+        )
