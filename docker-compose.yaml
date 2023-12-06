@@ -1,5 +1,10 @@
 version: '3'
 services:
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+
   db:
     image: postgres
     restart: always
@@ -26,7 +31,9 @@ services:
 
   app:
     build: .
-    command: bash -c "python manage.py migrate && python manage.py csu && python manage.py runserver 0.0.0.0:8000"
+#    tty: true
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    command: bash -c "python manage.py migrate && python manage.py csu && python manage.py runserver 0.0.0.0:8000"
     ports:
       - '8001:8000'
     volumes:
@@ -35,6 +42,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  celery:
+    build: .
+#    command: bash -c "celery -A config worker -l INFO -P eventlet"
+#    tty: true
+    command: bash -c "python.exe -m celery -A config worker -l INFO -P eventlet"
+    depends_on:
+      - redis
+      - app
 
 volumes:
   pg_data:
