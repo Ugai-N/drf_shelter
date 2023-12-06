@@ -83,9 +83,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
+        'OPTIONS': {'options': '-c search_path=public,content'}
     }
 }
 
@@ -151,7 +154,7 @@ CURRENCY_API_KEY = os.getenv('CURRENCY_API_KEY')
 # Настройки для Celery
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = 'redis://localhost:6379' # Например, Redis, который по умолчанию работает на порту 6379
+CELERY_BROKER_URL = 'redis://localhost:6379'  # Например, Redis, который по умолчанию работает на порту 6379
 
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
